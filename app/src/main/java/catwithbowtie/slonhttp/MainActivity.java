@@ -37,8 +37,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void registration(View view) {
+        RequestBody formBody = new FormBody.Builder()
+                .add("name", name.getText().toString())
+                .add("login", login.getText().toString())
+                .add("password", password.getText().toString())
+                .build();
+
         Request request = new Request.Builder()
-                .url(ip + ":" + port + "/reg?" + "name=" + name.getText().toString() + "&login=" + login.getText().toString() + "&password=" + password.getText().toString()).build();
+                .url(ip + ":" + port + "/reg")
+                .post(formBody)
+                .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
